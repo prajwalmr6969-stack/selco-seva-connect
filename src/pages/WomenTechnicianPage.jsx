@@ -254,7 +254,7 @@ export const WomenTechnicianPage = () => {
         </section>
 
         {/* 4. RECENT CANDIDATE APPLICATIONS LOG */}
-        <section className="bg-white rounded-3xl p-6 sm:p-8 border border-amber-100 shadow-sm space-y-4">
+        <section id="apply" className="bg-white rounded-3xl p-6 sm:p-8 border border-amber-100 shadow-sm space-y-4 scroll-mt-24">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
               <h3 className="text-lg font-bold text-slate-900">

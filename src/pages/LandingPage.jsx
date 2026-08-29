@@ -38,7 +38,7 @@ export const LandingPage = () => {
     <div className="min-h-screen bg-[#FDFBF7] text-slate-800">
       
       {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden pt-8 pb-16 md:pt-14 md:pb-24 border-b border-amber-100 bg-gradient-to-b from-amber-50/70 via-cream-100 to-[#FDFBF7]">
+      <section className="relative overflow-hidden pt-8 pb-16 md:pt-14 md:pb-24 border-b border-amber-100 bg-gradient-to-b from-amber-50/70 via-solar-cream-100 to-[#FDFBF7]">
         {/* Subtle Background Solar Graphics */}
         <div className="absolute top-0 right-0 -mr-24 -mt-24 w-96 h-96 rounded-full bg-amber-200/30 blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-96 h-96 rounded-full bg-solar-teal-200/20 blur-3xl pointer-events-none" />
