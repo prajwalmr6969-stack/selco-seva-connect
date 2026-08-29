@@ -4,12 +4,19 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = Number(process.env.PORT || 3001);
+const ENV = process.env.NODE_ENV || 'development';
+const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || '*';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(cors());
+app.disable('x-powered-by');
+
+app.use(cors({
+  origin: CLIENT_ORIGIN === '*' ? true : CLIENT_ORIGIN,
+  credentials: true
+}));
 app.use(express.json());
 
 app.get('/api/health', (req, res) => {
@@ -17,7 +24,7 @@ app.get('/api/health', (req, res) => {
     status: 'ok',
     app: 'SELCO SevaConnect API',
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development'
+    environment: ENV
   });
 });
 
@@ -41,6 +48,16 @@ app.get('/api/impact', (req, res) => {
   });
 });
 
+app.get('/api/meta', (req, res) => {
+  res.json({
+    app: 'SELCO SevaConnect',
+    version: '2.0.0',
+    backend: 'Express',
+    frontend: 'React + Vite',
+    deployment: 'GitHub Pages + API-ready backend'
+  });
+});
+
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('*', (req, res) => {
@@ -50,6 +67,22 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`SELCO SevaConnect API running on http://localhost:${PORT}`);
-});
+const startServer = () => {
+  app.listen(PORT, () => {
+    console.log(`SELCO SevaConnect API running on http://localhost:${PORT} in ${ENV} mode`);
+  });
+};
+
+try {
+  startServer();
+} catch (error) {
+  if (error.code === 'EADDRINUSE') {
+    const fallbackPort = PORT + 1;
+    console.warn(`Port ${PORT} is busy. Retrying on ${fallbackPort}`);
+    app.listen(fallbackPort, () => {
+      console.log(`SELCO SevaConnect API running on http://localhost:${fallbackPort} in ${ENV} mode`);
+    });
+  } else {
+    throw error;
+  }
+}

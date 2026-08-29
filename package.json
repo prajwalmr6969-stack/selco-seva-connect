@@ -7,11 +7,13 @@
   "scripts": {
     "dev": "vite --host",
     "server": "node server.js",
+    "start": "node server.js",
     "dev:full": "concurrently \"npm run server\" \"npm run dev\"",
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "deploy:all": "npm run build && npm run deploy"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.3",
