@@ -68,6 +68,8 @@ npm run build
 npm run deploy
 ```
 
+For automatic deployment, set the repository's Pages source to **GitHub Actions**. Every push to `main` then builds and publishes the `dist` folder using `.github/workflows/deploy.yml`.
+
 ## Environment Setup
 
 Copy the sample env file:
