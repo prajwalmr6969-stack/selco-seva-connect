@@ -9,7 +9,7 @@
     "server": "node server.js",
     "start": "node server.js",
     "dev:full": "concurrently \"npm run server\" \"npm run dev\"",
-    "build": "vite build",
+    "build": "vite build && cp dist/index.html dist/404.html",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
